@@ -15,7 +15,7 @@ const Chat = () => {
     // },[])
 
     useEffect(() => {
-        const socket = new WebSocket('wss://13.209.61.52:1234')
+        const socket = new WebSocket('wss://test.9gb.me/ws/')
         socket.onmessage = (event) => {
             setMessages((prev) => [...prev, event.data])
         }
@@ -62,7 +62,7 @@ const Chat = () => {
                 onKeyDown={keyHandler}
             />
 
-            <buuton onClick={sendMessage}>Send</buuton>
+            <button onClick={sendMessage}>Send</button>
         </div>
     )
 }
