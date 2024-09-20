@@ -1,0 +1,15 @@
+nav {
+    height: 50px;
+    width: 100%;
+    background-color: antiquewhite;
+    display: flex;
+    align-items: center;
+}
+
+nav > div {
+    margin-left: 20px;
+}
+
+* {
+    text-decoration: none;
+}

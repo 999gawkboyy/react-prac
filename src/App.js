@@ -1,24 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import { Provider } from 'react-redux';
+import store from './store';
+import Nav from './navigator';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Counter from './Counter';
+import Chat from './chat';
 
-function App() {
+const CounterWrapper = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Provider store={store}>
+      <Counter />
+    </Provider>
+  );
+}
+
+const Home = () => {
+  return (
+    <div>
+      <h1>Home Page</h1>
+      <h3>Hello World!</h3>
     </div>
+  );
+}
+
+const App = () => {
+  return (
+    
+    <Router>
+      <Nav />
+      <Routes>
+        <Route path='/' exact Component={Home}/>
+        <Route path='/counter' exact Component={CounterWrapper}/>
+        <Route path='/chat' exact Component={Chat} />
+      </Routes>
+    </Router>
   );
 }
 
