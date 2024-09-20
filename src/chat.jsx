@@ -36,7 +36,7 @@ const Chat = () => {
     }, [])
 
     const sendMessage = () => {
-        if (message) {
+        if (message && nicknameSet) {
             ws.current.send(JSON.stringify({ text: message }));
             setMessage('');
         }
@@ -84,7 +84,7 @@ const Chat = () => {
             <div id="messages">
                 {messages.map((msg, index) => (
                     <div key={index}>
-                        <strong>{msg.nickname}:</strong> {msg.text}
+                        <strong>{msg.nickname}:</strong> {msg.text == null ? "*입장하셨습니다*": msg.text}
                     </div>
                 ))}
             </div>
