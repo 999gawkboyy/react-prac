@@ -15,7 +15,7 @@ const Chat = () => {
     // },[])
 
     useEffect(() => {
-        const socket = new WebSocket('wss://test.9gb.me/ws/')
+        const socket = new WebSocket('http://test.9gb.me:1237')
         socket.onmessage = (event) => {
             setMessages((prev) => [...prev, event.data])
         }
