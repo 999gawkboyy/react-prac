@@ -1,11 +1,12 @@
 import React, {useEffect, useState, useRef} from 'react';
+import {useUser} from './UserContext'
 import axios from 'axios'
 import './chat.css'
 const Chat = () => {
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState('')
     const ws = useRef(null);
-
+    const {userData} = useUser();
     // const [ ip , setIp ] = useState();
 
     // useEffect( () => {
@@ -19,17 +20,18 @@ const Chat = () => {
         ws.current = new WebSocket('wss://test.9gb.me/ws/');
 
         ws.current.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        setMessages((prevMessages) => [...prevMessages, data]);
+            const data = JSON.parse(event.data);
+            setMessages((prevMessages) => [...prevMessages, data]);
         };
 
         return () => {
-        ws.current.close();
+            ws.current.close();
         };
     }, [])
 
     const sendMessage = () => {
         if (message) {
+            ws.current.send(JSON.stringify({ type: 'setNickname', nickname: userData.displayName }));
             ws.current.send(JSON.stringify({ text: message }));
             setMessage('');
         }
@@ -54,7 +56,7 @@ const Chat = () => {
             <div id="messages">
                 {messages.map((msg, index) => (
                     <div key={index}>
-                        <strong>{msg.nickname}:</strong> {msg.text == null ? "*입장하셨습니다*": msg.text}
+                        <strong>{msg.nickname}:</strong> {msg.text == null ? "": msg.text}
                     </div>
                 ))}
             </div>
