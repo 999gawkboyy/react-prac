@@ -13,10 +13,10 @@ const Nav = () => {
         const provider = new GoogleAuthProvider();
         console.log(auth)
         try {
-            const result = await signInWithPopup(auth, provider);
-            } catch (error) {   
+            await signInWithPopup(auth, provider);
+        } catch (error) {   
                 console.error('Login failed: ', error);
-            };
+        };
     }
 
     const handleLogout = () => {

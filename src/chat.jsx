@@ -24,10 +24,22 @@ const Chat = () => {
             setMessages((prevMessages) => [...prevMessages, data]);
         };
 
-        return () => {
-            ws.current.close();
+        ws.current.onclose = () => {
+            console.log("WebSocket closed");
         };
-    }, [ws])
+        
+        const pingInterval = setInterval(() => {
+            if (ws.current && ws.current.readyState === WebSocket.OPEN) {
+                ws.current.send(JSON.stringify({ type: 'ping' }));
+            }
+        }, 5000);
+
+        return () => {
+            console.log("close")
+            ws.current.close();
+            clearInterval(pingInterval);
+        };
+    }, [])
 
     const sendMessage = () => {
         if (message) {
