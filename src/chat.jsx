@@ -27,7 +27,7 @@ const Chat = () => {
         return () => {
             ws.current.close();
         };
-    }, [])
+    }, [ws])
 
     const sendMessage = () => {
         if (message) {
