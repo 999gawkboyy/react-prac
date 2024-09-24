@@ -32,8 +32,9 @@ const Nav = () => {
             <div>{
                 !userData ? 
                 <button onClick={handleLogin}>login</button> : 
-                <div>
-                    nickname: {userData.displayName}&nbsp;
+                <div style={{display: "flex", alignItems: "center"}}>
+                    <img src={userData.photoURL} alt="pfp" style={{width: "30px", height: "30px"}}/>
+                    {userData.displayName}&nbsp;
                     <button onClick={handleLogout}>logout</button>
                 </div>
                 }
