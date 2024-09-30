@@ -42,6 +42,8 @@ const Chat = () => {
     }, [])
 
     const sendMessage = () => {
+        if (userData.displayName === undefined)
+            alert("login first"); return;
         if (message) {
             ws.current.send(JSON.stringify({ type: 'setNickname', nickname: userData.displayName }));
             ws.current.send(JSON.stringify({ text: message }));
